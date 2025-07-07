@@ -1,0 +1,5 @@
+model_path: models/yolo11x.pt
+track_history_length: 120
+batch_size: 32
+line_thickness: 3
+track_color: [0, 255, 0]
