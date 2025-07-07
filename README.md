@@ -13,12 +13,12 @@ Track multiple objects in video streams using YOLOv8 + BoT-SORT with efficient b
 
 This repository provides a clean, efficient, and scalable pipeline to perform **multi-object tracking** on videos using **Ultralytics YOLOv8** and **BoT-SORT**.
 
-Features:
+**Key Features**:
 
-- ✅ YOLOv8 inference with persistent BoT-SORT tracking
-- 🧵 Batch processing for performance
-- 🎞️ Historical motion trails per object
-- ⚙️ Modularized codebase for easy customization
+- ✅ YOLOv8 inference with persistent BoT-SORT tracking  
+- 🧵 Batch processing for performance  
+- 🎞️ Historical motion trails per object  
+- ⚙️ Modularized, extensible Python codebase  
 - 💻 Works both locally and on Google Colab (with GPU)
 
 ---
@@ -35,6 +35,8 @@ Object-Tracking/
 │   └── vietnam.mp4
 ├── outputs/                  # Output tracking videos
 │   └── vietnam_tracked.mp4
+├── assets/                   # Visual outputs for README
+│   └── tracking_preview.gif
 ├── src/
 │   └── utils.py              # Logging/helper functions
 ├── notebooks/
@@ -54,14 +56,14 @@ cd Object-Tracking
 pip install -r requirements.txt
 ```
 
-> 💡 *Optional: use a Python virtual environment for isolation*
+> 💡 *Optional: Use a Python virtual environment for isolation.*
 
 ---
 
 ### 2️⃣ Add Inputs
 
-* 🎥 Put your input video in `samples/` (e.g., `vietnam.mp4`)
-* 🧠 Place your YOLO model in `models/` (e.g., `yolo11x.pt`)
+* 🎥 Add your input video to `samples/` (e.g., `vietnam.mp4`)
+* 🧠 Add your YOLO model (e.g., `yolo11x.pt`) to `models/`
 
 ---
 
@@ -71,26 +73,25 @@ pip install -r requirements.txt
 python main.py --video-path samples/vietnam.mp4
 ```
 
-🎬 Output will be saved to `outputs/vietnam_tracked.mp4`.
+🎬 Output video will be saved to:
+`outputs/vietnam_tracked.mp4`
 
 ---
 
 ### ☁️ Run on Google Colab
 
-📌 Use `notebooks/Object_Tracking.ipynb` to run tracking in Colab with GPU.
+Use our [Google Colab notebook](notebooks/Object_Tracking.ipynb) to:
 
-Includes:
-
-* 🔗 Google Drive integration
-* 📁 Model + video upload
-* 🧠 YOLOv8 + BoT-SORT batching
-* 📤 Output video saved back to Drive
+* ✅ Run inference with GPU (free)
+* ✅ Upload model & video from Google Drive
+* ✅ Output results to Drive
+* ✅ Convert MP4 to GIF easily for preview
 
 ---
 
-## ⚙️ Config Example
+## ⚙️ Configuration
 
-You can adjust configuration directly in `main.py` or a config module:
+You can change configuration in `main.py` (or abstract to a config file):
 
 ```python
 return {
@@ -102,13 +103,7 @@ return {
 }
 ```
 
-👉 To process the full video (not just first 3 seconds), replace:
-
-```python
-frames_to_process = int(fps * 3)
-```
-
-with:
+> To process full video instead of just 3 seconds:
 
 ```python
 frames_to_process = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -118,7 +113,7 @@ frames_to_process = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
 ## 📦 Requirements
 
-```txt
+```
 ultralytics==8.3.162
 opencv-python==4.11.0
 numpy==2.0.2
@@ -126,7 +121,7 @@ tqdm==4.67.1
 PyYAML==6.0.2
 ```
 
-Install via:
+Install all:
 
 ```bash
 pip install -r requirements.txt
@@ -140,7 +135,23 @@ pip install -r requirements.txt
   <img src="assets/tracking_preview.gif" width="640" alt="Tracking Demo Preview"/>
 </p>
 
-> Output sample from `outputs/vietnam_tracked.mp4`, showing tracked objects with trail lines using YOLOv8 + BoT-SORT.
+> Sample from `vietnam_tracked.mp4`, showing tracked people with historical trails rendered frame-by-frame.
+
+---
+
+### 🔄 Convert MP4 to GIF (optional)
+
+If you'd like to convert your output `.mp4` to `.gif`:
+
+```bash
+# Install ffmpeg if not already
+sudo apt install ffmpeg
+
+# Convert (adjust size and fps if needed)
+ffmpeg -i outputs/vietnam_tracked.mp4 \
+       -vf "fps=10,scale=640:-1:flags=lanczos" \
+       assets/tracking_preview.gif
+```
 
 ---
 
@@ -152,8 +163,7 @@ MIT License — See [`LICENSE`](LICENSE)
 
 ## 🌟 Contribute
 
-Contributions, issues and feature requests are welcome!
-
-If you find this project useful, please consider giving it a ⭐ on GitHub!
+Pull requests, issues, and suggestions are welcome.
+If you found this project helpful, **please ⭐ it on GitHub** — it really helps!
 
 ---
