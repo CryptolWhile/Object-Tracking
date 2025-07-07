@@ -135,25 +135,6 @@ pip install -r requirements.txt
   <img src="assets/tracking_preview.gif" width="640" alt="Tracking Demo Preview"/>
 </p>
 
-> Sample from `vietnam_tracked.mp4`, showing tracked people with historical trails rendered frame-by-frame.
-
----
-
-### 🔄 Convert MP4 to GIF (optional)
-
-If you'd like to convert your output `.mp4` to `.gif`:
-
-```bash
-# Install ffmpeg if not already
-sudo apt install ffmpeg
-
-# Convert (adjust size and fps if needed)
-ffmpeg -i outputs/vietnam_tracked.mp4 \
-       -vf "fps=10,scale=640:-1:flags=lanczos" \
-       assets/tracking_preview.gif
-```
-
----
 
 ## 📄 License
 
